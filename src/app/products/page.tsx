@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { PRODUCTS } from "@/lib/data/products";
 import { formatPrice } from "@/lib/utils";
+import { SearchResults } from "./SearchResults";
 
 const CATEGORIES = [
   { name: "Printing Machines & Equipment", slug: "printing-machines", count: PRODUCTS.filter((p) => p.category === "printing-machines").length, image: "/images/products/xp600-large-format.png" },
@@ -17,7 +18,42 @@ export const metadata = {
   description: "Browse our range of premium printing products: business cards, flyers, banners, corporate gifts, awards, and more.",
 };
 
-export default function ProductsPage() {
+export default function ProductsPage({
+  searchParams,
+}: {
+  searchParams: { q?: string };
+}) {
+  const query = searchParams.q?.trim() || "";
+
+  // If there's a search query, filter products and show results
+  if (query) {
+    const q = query.toLowerCase();
+    const results = PRODUCTS.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().replace("-", " ").includes(q) ||
+        p.shortDescription.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+    );
+
+    return (
+      <div className="section-padding">
+        <div className="container-custom">
+          <nav className="mb-8 flex items-center gap-2 text-sm text-charcoal/70">
+            <Link href="/" className="hover:text-red">Home</Link>
+            <ChevronRight className="h-4 w-4" />
+            <Link href="/products" className="hover:text-red">Products</Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-navy">Search</span>
+          </nav>
+
+          <SearchResults query={query} initialResults={results} />
+        </div>
+      </div>
+    );
+  }
+
+  // Default: show category grid
   return (
     <div className="section-padding">
       <div className="container-custom">

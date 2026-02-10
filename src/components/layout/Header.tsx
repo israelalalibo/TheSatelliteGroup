@@ -110,6 +110,7 @@ export function Header() {
             <button
               type="button"
               aria-label="Search"
+              onClick={() => setSearchOpen(true)}
               className="hidden p-2 text-charcoal hover:text-red md:block"
             >
               <Search className="h-5 w-5" />
@@ -217,6 +218,18 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="border-t border-soft-gray bg-white lg:hidden">
           <nav className="container-custom flex flex-col py-4">
+            {/* Mobile search */}
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setSearchOpen(true);
+              }}
+              className="flex items-center gap-2 border-b border-soft-gray py-3 font-medium text-charcoal hover:text-red"
+            >
+              <Search className="h-5 w-5" />
+              Search Products
+            </button>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -276,6 +289,9 @@ export function Header() {
           </nav>
         </div>
       )}
+
+      {/* Search Modal */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

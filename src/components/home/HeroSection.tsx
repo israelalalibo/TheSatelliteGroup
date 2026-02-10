@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Search, Truck, Shield, Users } from "lucide-react";
@@ -12,6 +14,17 @@ const TRUST_BADGES = [
 ];
 
 export function HeroSection() {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    if (q) {
+      router.push(`/products?q=${encodeURIComponent(q)}`);
+    }
+  };
+
   return (
     <section className="relative min-h-[90vh] overflow-hidden">
       {/* Background Image with Overlay */}
@@ -52,22 +65,27 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-8"
           >
-            <div className="mx-auto flex max-w-xl overflow-hidden rounded-full bg-white/95 shadow-xl backdrop-blur-sm">
+            <form
+              onSubmit={handleSearch}
+              className="mx-auto flex max-w-xl overflow-hidden rounded-full bg-white/95 shadow-xl backdrop-blur-sm"
+            >
               <div className="flex flex-1 items-center gap-2 px-6 py-4">
                 <Search className="h-5 w-5 text-charcoal/60" />
                 <input
                   type="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="What would you like to print today?"
                   className="flex-1 bg-transparent text-charcoal placeholder:text-charcoal/60 focus:outline-none"
                 />
               </div>
               <button
-                type="button"
+                type="submit"
                 className="bg-navy px-6 py-4 font-semibold text-white transition-colors hover:bg-red hover:text-navy"
               >
                 Search
               </button>
-            </div>
+            </form>
           </motion.div>
 
           {/* CTA Buttons */}
