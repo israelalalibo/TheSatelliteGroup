@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #0A1628;
+    --navy-dark: #050d18;
+    --red: #DC2626;
+    --orange: #FF6B35;
+    --charcoal: #1A1A2E;
+    --soft-gray: #F8F9FA;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --error: #EF4444;
+    --container: 1280px;
+    --radius: 0.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-charcoal bg-white antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-soft-gray;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-navy/40;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold
+           bg-navy text-white hover:bg-navy-light transition-all duration-200
+           shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold
+           border-2 border-navy text-navy hover:bg-navy hover:text-white
+           transition-all duration-200;
+  }
+
+  .btn-red {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold
+           bg-red text-white hover:bg-red-light transition-all duration-200
+           shadow-lg hover:shadow-red-glow;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-card-hover;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-glass;
+  }
+}

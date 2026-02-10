@@ -1,0 +1,72 @@
+import Link from "next/link";
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
+import { PRODUCTS } from "@/lib/data/products";
+import { formatPrice } from "@/lib/utils";
+
+const CATEGORIES = [
+  { name: "Printing Machines & Equipment", slug: "printing-machines", count: PRODUCTS.filter((p) => p.category === "printing-machines").length, image: "/images/products/xp600-large-format.png" },
+  { name: "Raw Materials & Substrates", slug: "raw-materials", count: PRODUCTS.filter((p) => p.category === "raw-materials").length, image: "/images/products/flex-banner-rolls.png" },
+  { name: "Banners & Signage", slug: "banners", count: PRODUCTS.filter((p) => p.category === "banners").length, image: "/images/products/flex-banner-warehouse.png" },
+  { name: "Corporate Gifts & Branded Items", slug: "corporate-gifts", count: PRODUCTS.filter((p) => p.category === "corporate-gifts").length, image: "/images/products/heat-press-machine.png" },
+  { name: "Business Cards", slug: "business-cards", count: PRODUCTS.filter((p) => p.category === "business-cards").length, image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80" },
+];
+
+export const metadata = {
+  title: "Products | Satelite Group - Premium Printing Nigeria",
+  description: "Browse our range of premium printing products: business cards, flyers, banners, corporate gifts, awards, and more.",
+};
+
+export default function ProductsPage() {
+  return (
+    <div className="section-padding">
+      <div className="container-custom">
+        <nav className="mb-8 flex items-center gap-2 text-sm text-charcoal/70">
+          <Link href="/" className="hover:text-red">Home</Link>
+          <ChevronRight className="h-4 w-4" />
+          <span className="text-navy">Products</span>
+        </nav>
+
+        <div className="mb-12">
+          <h1 className="font-heading text-section font-bold text-navy">Our Products</h1>
+          <p className="mt-2 text-charcoal/80">
+            Machines, raw materials, and finished products—everything for printing and branding
+          </p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {CATEGORIES.map((category) => (
+            <Link
+              key={category.slug}
+              href={`/products/${category.slug}`}
+              className="group overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-xl"
+            >
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image
+                  src={category.image}
+                  alt={category.name}
+                  fill
+                  className="object-cover transition-transform group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-navy/50 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center">
+                  <span className="rounded-full bg-red px-4 py-2 font-semibold text-navy">
+                    View {category.count} Products
+                  </span>
+                </div>
+              </div>
+              <div className="p-4">
+                <h2 className="font-heading text-xl font-semibold text-navy group-hover:text-red">
+                  {category.name}
+                </h2>
+                <p className="mt-1 text-sm text-charcoal/70">
+                  {category.count} products available
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

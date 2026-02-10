@@ -1,0 +1,12 @@
+
+
+
+
+1) What does the busness use to take payments online?
+2) What exact services do they offer? To be them implemented in the site
+3)Actual prices for the items
+4)Social media platform (Instagram, facebook, linkedin)
+5)Opening hours? and days
+6)About Us page
+7)Actual images to use on the website,  popular items?
+8)Chnages such that variables that might change are in env (Number, email, etc)
