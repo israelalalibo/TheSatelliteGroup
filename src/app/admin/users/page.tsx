@@ -37,7 +37,7 @@ export default function AdminUsersPage() {
         if (!res.ok) {
           throw new Error(data.error || `Failed to fetch users (${res.status})`);
         }
-        setUsers(Array.isArray(data.users) ? data.users : []);
+        setUsers(Array.isArray(data.users) ? (data.users as UserRow[]) : []);
       })
       .catch((e) => setError(e.name === "AbortError" ? "Request timed out. Please try again." : e.message))
       .finally(() => {

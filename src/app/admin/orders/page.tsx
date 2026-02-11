@@ -45,7 +45,7 @@ export default function AdminOrdersPage() {
         if (!res.ok) {
           throw new Error(data.error || `Failed to fetch orders (${res.status})`);
         }
-        setOrders(Array.isArray(data.orders) ? data.orders : []);
+        setOrders(Array.isArray(data.orders) ? (data.orders as Order[]) : []);
       })
       .catch((e) => setError(e.name === "AbortError" ? "Request timed out. Please try again." : e.message))
       .finally(() => {
