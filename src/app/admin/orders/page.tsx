@@ -54,7 +54,7 @@ export default function AdminOrdersPage() {
       });
   };
 
-  useEffect(() => fetchOrders, []);
+  useEffect(() => { fetchOrders(); }, []);
 
   const confirmOrder = (orderId: number) => {
     setConfirmingId(orderId);

@@ -46,7 +46,7 @@ export default function AdminUsersPage() {
       });
   };
 
-  useEffect(() => fetchUsers, []);
+  useEffect(() => { fetchUsers(); }, []);
 
   const updateRole = (userId: number, role: string) => {
     setUpdatingId(userId);
