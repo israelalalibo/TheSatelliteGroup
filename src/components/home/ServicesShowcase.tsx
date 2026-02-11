@@ -8,33 +8,39 @@ import { ArrowRight } from "lucide-react";
 const SERVICES = [
   {
     title: "Printing Machines & Equipment",
-    description: "Large format printers, heat press machines, mug presses, plotters, laminators—everything you need to set up or scale your print shop.",
+    description: "Large format printers, heat press machines, embroidery machines, die cutting machines—everything you need to set up or scale your print shop.",
     image: "/images/products/xp600-large-format.png",
     href: "/products/printing-machines",
   },
   {
     title: "Flex Banner & Raw Materials",
-    description: "Premium PVC flex banner rolls, self-adhesive vinyl, sublimation paper, ink, and all printing substrates. Bulk supply with nationwide delivery.",
+    description: "Premium PVC flex banner, SAV, reflective flex, sublimation paper, ink, and souvenir blanks. Bulk supply with nationwide delivery.",
     image: "/images/products/flex-banner-rolls.png",
     href: "/products/raw-materials",
   },
   {
     title: "Large Format Banner Printing",
-    description: "Custom eco-solvent flex banner printing for outdoor and indoor signage. High-resolution output with eyelet finishing included.",
+    description: "Flex banners, roll-up banners, X-banners, billboards. Custom eco-solvent printing with eyelet finishing included.",
     image: "/images/products/flex-banner-warehouse.png",
     href: "/products/banners",
   },
   {
     title: "Heat Press & Sublimation",
-    description: "Heat press machines for t-shirts, mugs, caps, and more. We supply the machines and do the printing — everything for custom branded merchandise.",
+    description: "Heat press machines for t-shirts, mugs, caps, and more. We supply machines and do the printing — everything for custom branded merchandise.",
     image: "/images/products/heat-press-machine.png",
     href: "/products/corporate-gifts",
   },
   {
-    title: "Vinyl Signage & Vehicle Wraps",
-    description: "Self-adhesive vinyl rolls in every color and finish for shop signage, vehicle wraps, wall graphics, and cut lettering.",
+    title: "SAV Stickers & Vehicle Wraps",
+    description: "Self-adhesive vinyl for car branding, wall wraps, window graphics, and signage. Cut, printed, and applied.",
     image: "/images/products/vinyl-sticker-rolls.png",
-    href: "/products/raw-materials",
+    href: "/products/stickers",
+  },
+  {
+    title: "Awards & Recognition",
+    description: "Awards, plaques, trophies, medals, and medallions for corporate recognition and events. Engraving and etching services.",
+    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&q=80",
+    href: "/products/awards",
   },
   {
     title: "Supply Chain & Logistics",

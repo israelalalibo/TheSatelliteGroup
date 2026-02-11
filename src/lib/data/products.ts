@@ -411,6 +411,305 @@ export const PRODUCTS: Product[] = [
       "Individual packaging available",
     ],
   },
+
+  // ── Posters & Flyers ───────────────────────────────────────────────
+  {
+    id: "11",
+    slug: "posters-flyers",
+    name: "Posters & Flyers",
+    description:
+      "High-quality posters and flyers for events, promotions, and marketing. Various sizes, paper weights, and finishes available.",
+    shortDescription: "Posters and flyers, various sizes",
+    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&q=80",
+    images: ["https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&q=80"],
+    category: "posters-flyers",
+    basePrice: 150,
+    rating: 4.8,
+    reviewCount: 89,
+    quantityTiers: [
+      { min: 100, max: 499, pricePerUnit: 150 },
+      { min: 500, max: 999, pricePerUnit: 120 },
+      { min: 1000, max: 4999, pricePerUnit: 90 },
+    ],
+    features: [
+      "Full color printing",
+      "Multiple size options",
+      "Matte or glossy finish",
+      "Fast turnaround",
+    ],
+  },
+
+  // ── Brochures & Catalogs ───────────────────────────────────────────
+  {
+    id: "12",
+    slug: "brochures-catalogs",
+    name: "Brochures & Catalogs",
+    description:
+      "Professional brochures and product catalogs. Multiple formats, paper types, and binding options available.",
+    shortDescription: "Brochures, catalogs, multiple formats",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=500&q=80",
+    images: ["https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=500&q=80"],
+    category: "brochures-catalogs",
+    basePrice: 5000,
+    rating: 4.7,
+    reviewCount: 56,
+    features: [
+      "A4, A5, and custom sizes",
+      "Saddle stitch or perfect binding",
+      "Premium paper options",
+      "Design support available",
+    ],
+  },
+
+  // ── Wedding & Event Invitations ────────────────────────────────────
+  {
+    id: "13",
+    slug: "wedding-event-invitations",
+    name: "Wedding & Event Invitations",
+    description:
+      "Elegant wedding invitations, event invites, and thank-you cards. Custom designs and premium finishes including foil and embossing.",
+    shortDescription: "Wedding & event invites, premium finishes",
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
+    images: ["https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80"],
+    category: "invitations",
+    basePrice: 250,
+    rating: 4.9,
+    reviewCount: 134,
+    quantityTiers: [
+      { min: 50, max: 99, pricePerUnit: 250 },
+      { min: 100, max: 249, pricePerUnit: 200 },
+      { min: 250, max: 499, pricePerUnit: 160 },
+    ],
+    features: [
+      "Custom design or templates",
+      "Premium paper and finishes",
+      "Foil and embossing options",
+      "Envelopes included",
+    ],
+  },
+
+  // ── Roll-up & X-Banners ────────────────────────────────────────────
+  {
+    id: "14",
+    slug: "rollup-x-banners",
+    name: "Roll-up Banners & X-Banners",
+    description:
+      "Portable roll-up banners and X-banners for exhibitions, trade shows, and indoor displays. Easy set-up with professional finish.",
+    shortDescription: "Portable roll-up and X-banners",
+    image: "/images/products/flex-banner-warehouse.png",
+    images: ["/images/products/flex-banner-warehouse.png"],
+    category: "banners",
+    basePrice: 25000,
+    rating: 4.8,
+    reviewCount: 78,
+    options: [
+      {
+        id: "type",
+        name: "Banner Type",
+        values: [
+          { id: "rollup", label: "Roll-up Banner (85x200cm)", priceModifier: 0 },
+          { id: "x-banner", label: "X-Banner (80x200cm)", priceModifier: -2000 },
+        ],
+      },
+    ],
+    features: [
+      "Complete with stand",
+      "Carry bag included",
+      "Reusable and durable",
+      "Quick assembly",
+    ],
+  },
+
+  // ── Calendars ──────────────────────────────────────────────────────
+  {
+    id: "15",
+    slug: "wall-desk-calendars",
+    name: "Wall & Desk Calendars",
+    description:
+      "Custom wall and desk calendars with your branding. Ideal for corporate gifts and promotional giveaways.",
+    shortDescription: "Wall and desk calendars, branded",
+    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=500&q=80",
+    images: ["https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=500&q=80"],
+    category: "calendars",
+    basePrice: 1200,
+    rating: 4.6,
+    reviewCount: 67,
+    quantityTiers: [
+      { min: 50, max: 99, pricePerUnit: 1200 },
+      { min: 100, max: 499, pricePerUnit: 900 },
+      { min: 500, max: 999, pricePerUnit: 700 },
+    ],
+    features: [
+      "Full color printing",
+      "Wall or desk format",
+      "Custom branding",
+      "Bulk discounts",
+    ],
+  },
+
+  // ── SAV Sticker Printing ───────────────────────────────────────────
+  {
+    id: "16",
+    slug: "sav-sticker-printing",
+    name: "SAV Sticker Printing",
+    description:
+      "Self-adhesive vinyl sticker printing for car branding, wall wraps, window graphics, and signage. Cut, printed, and applied.",
+    shortDescription: "SAV stickers, car branding, wall wraps",
+    image: "/images/products/vinyl-sticker-rolls.png",
+    images: ["/images/products/vinyl-sticker-rolls.png"],
+    category: "stickers",
+    basePrice: 2000,
+    rating: 4.8,
+    reviewCount: 156,
+    features: [
+      "Car branding & vehicle wraps",
+      "Window graphics",
+      "Wall wraps & signage",
+      "Weeding & application available",
+    ],
+  },
+
+  // ── Branded Caps & Polos ────────────────────────────────────────────
+  {
+    id: "17",
+    slug: "branded-caps-polos",
+    name: "Branded Caps & Polos",
+    description:
+      "Custom branded caps and polo shirts for corporate events, uniforms, and promotions. Embroidery and heat transfer options.",
+    shortDescription: "Caps & polos, embroidery & print",
+    image: "https://images.unsplash.com/photo-1578932750294-f5075e85f44a?w=500&q=80",
+    images: ["https://images.unsplash.com/photo-1578932750294-f5075e85f44a?w=500&q=80"],
+    category: "corporate-gifts",
+    basePrice: 3500,
+    rating: 4.7,
+    reviewCount: 92,
+    quantityTiers: [
+      { min: 10, max: 24, pricePerUnit: 350 },
+      { min: 25, max: 49, pricePerUnit: 300 },
+      { min: 50, max: 99, pricePerUnit: 260 },
+    ],
+    features: [
+      "Embroidery or heat transfer",
+      "Multiple colors & styles",
+      "Bulk pricing available",
+      "Fast turnaround",
+    ],
+  },
+
+  // ── Awards & Recognition ───────────────────────────────────────────
+  {
+    id: "18",
+    slug: "awards-plaques-trophies",
+    name: "Awards, Plaques & Trophies",
+    description:
+      "Custom awards, plaques, trophies, medals, and medallions for corporate recognition, events, and ceremonies.",
+    shortDescription: "Awards, plaques, trophies, medals",
+    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80",
+    images: ["https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80"],
+    category: "awards",
+    basePrice: 8500,
+    rating: 4.9,
+    reviewCount: 203,
+    features: [
+      "Engraving & etching",
+      "Custom designs",
+      "Wood, acrylic, metal options",
+      "Medals & medallions",
+    ],
+  },
+
+  // ── Embroidery Machine ──────────────────────────────────────────────
+  {
+    id: "19",
+    slug: "embroidery-machine",
+    name: "Embroidery Machine",
+    description:
+      "Industrial embroidery machine for caps, polos, bags, and promotional apparel. Multi-head options for high-volume production.",
+    shortDescription: "Industrial embroidery, multi-head",
+    image: "/images/products/heat-press-machine.png",
+    images: ["/images/products/heat-press-machine.png"],
+    category: "printing-machines",
+    basePrice: 450000,
+    rating: 4.7,
+    reviewCount: 34,
+    features: [
+      "Multi-head embroidery",
+      "Cap and flat embroidery",
+      "Training included",
+      "Warranty & support",
+    ],
+  },
+
+  // ── Die Cutting Machine ─────────────────────────────────────────────
+  {
+    id: "20",
+    slug: "die-cutting-machine",
+    name: "Die Cutting Machine",
+    description:
+      "Die cutting machines for stickers, labels, packaging, and signage. Precision cutting for custom shapes and mass production.",
+    shortDescription: "Die cutting for stickers & packaging",
+    image: "/images/products/large-format-plotter.png",
+    images: ["/images/products/large-format-plotter.png"],
+    category: "printing-machines",
+    basePrice: 580000,
+    rating: 4.6,
+    reviewCount: 28,
+    features: [
+      "Precision cutting",
+      "Multiple material support",
+      "Commercial grade",
+      "Warranty included",
+    ],
+  },
+
+  // ── Souvenir Blanks ──────────────────────────────────────────────────
+  {
+    id: "21",
+    slug: "souvenir-blanks",
+    name: "Souvenir Blanks",
+    description:
+      "Souvenir blanks for heat press and sublimation: mugs, flasks, plates, key holders, and more. Bulk supply for your production.",
+    shortDescription: "Mugs, flasks, plates, sublimation blanks",
+    image: "/images/products/mug-cup-heat-press.png",
+    images: ["/images/products/mug-cup-heat-press.png"],
+    category: "raw-materials",
+    basePrice: 800,
+    rating: 4.8,
+    reviewCount: 145,
+    quantityTiers: [
+      { min: 10, max: 49, pricePerUnit: 800 },
+      { min: 50, max: 99, pricePerUnit: 650 },
+      { min: 100, max: 499, pricePerUnit: 550 },
+    ],
+    features: [
+      "Mugs, flasks, plates",
+      "Sublimation-ready",
+      "Bulk pricing",
+      "Various sizes",
+    ],
+  },
+
+  // ── Signage Materials ────────────────────────────────────────────────
+  {
+    id: "22",
+    slug: "aluco-foam-board",
+    name: "Aluco Boards & Foam Board",
+    description:
+      "Aluco boards for signage and building facades. Foam board for displays, mounting, and exhibitions. Durable and versatile.",
+    shortDescription: "Aluco boards, foam board",
+    image: "/images/products/flex-banner-warehouse.png",
+    images: ["/images/products/flex-banner-warehouse.png"],
+    category: "signage-materials",
+    basePrice: 4500,
+    rating: 4.7,
+    reviewCount: 89,
+    features: [
+      "Aluco boards for signage",
+      "Foam board for displays",
+      "Weather-resistant options",
+      "Custom sizes available",
+    ],
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {

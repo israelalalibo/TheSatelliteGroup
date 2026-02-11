@@ -4,10 +4,12 @@ import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 const FOOTER_LINKS = {
   products: [
     { label: "Business Cards", href: "/products/business-cards" },
-    { label: "Flyers", href: "/products/flyers" },
+    { label: "Posters & Flyers", href: "/products/posters-flyers" },
     { label: "Banners", href: "/products/banners" },
     { label: "Corporate Gifts", href: "/products/corporate-gifts" },
     { label: "Awards", href: "/products/awards" },
+    { label: "Printing Machines", href: "/products/printing-machines" },
+    { label: "Raw Materials", href: "/products/raw-materials" },
   ],
   company: [
     { label: "About Us", href: "/about" },

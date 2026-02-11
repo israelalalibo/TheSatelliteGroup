@@ -10,12 +10,17 @@ import { ProductGallery } from "@/components/product/ProductGallery";
 const CATEGORY_NAMES: Record<string, string> = {
   "business-cards": "Business Cards",
   flyers: "Flyers",
+  "posters-flyers": "Posters & Flyers",
   banners: "Banners",
   "corporate-gifts": "Corporate Gifts",
-  awards: "Awards",
-  stickers: "Stickers",
+  awards: "Awards & Recognition",
+  stickers: "Vinyl & Stickers",
   "printing-machines": "Printing Machines",
   "raw-materials": "Raw Materials",
+  "brochures-catalogs": "Brochures & Catalogs",
+  invitations: "Wedding & Event Invitations",
+  calendars: "Calendars",
+  "signage-materials": "Signage Materials",
 };
 
 const CATEGORIES = Object.keys(CATEGORY_NAMES);

@@ -122,11 +122,38 @@ export default function QuoteRequestPage() {
                 className="w-full rounded-lg border border-charcoal/20 px-4 py-3"
               >
                 <option value="">Select</option>
-                <option value="business-cards">Business Cards</option>
-                <option value="flyers">Flyers</option>
-                <option value="banners">Banners</option>
-                <option value="corporate-gifts">Corporate Gifts</option>
-                <option value="awards">Awards</option>
+                <optgroup label="Printing & Branding">
+                  <option value="flex-banner">Flex Banner Printing</option>
+                  <option value="sav-stickers">SAV Sticker Printing</option>
+                  <option value="posters-flyers">Posters & Flyers</option>
+                  <option value="business-cards">Business Cards</option>
+                  <option value="brochures-catalogs">Brochures & Catalogs</option>
+                  <option value="invitations">Wedding & Event Invitations</option>
+                  <option value="letterheads-notepads">Letterheads & Notepads</option>
+                  <option value="rollup-banners">Roll-up & X-Banners</option>
+                  <option value="calendars">Calendars</option>
+                  <option value="billboards">Billboards & Outdoor Signage</option>
+                  <option value="id-cards">PVC ID Cards</option>
+                  <option value="banners">Banners (General)</option>
+                  <option value="large-format">Large Format Printing</option>
+                  <option value="engraving-etching">Engraving & Etching</option>
+                </optgroup>
+                <optgroup label="Apparel & Promotional">
+                  <option value="corporate-gifts">Corporate Gifts</option>
+                  <option value="t-shirts-polos-caps">T-Shirts, Polos & Caps</option>
+                  <option value="towels">Towels</option>
+                  <option value="bags">Customized & Ready-made Bags</option>
+                  <option value="souvenirs">Souvenirs & Gift Items</option>
+                </optgroup>
+                <optgroup label="Awards & Recognition">
+                  <option value="awards">Awards, Plaques & Trophies</option>
+                  <option value="medals">Medals & Medallions</option>
+                </optgroup>
+                <optgroup label="Machines & Materials">
+                  <option value="printing-machines">Printing Machines</option>
+                  <option value="raw-materials">Raw Materials & Supplies</option>
+                  <option value="signage-materials">Aluco, Foam Board, Dampa</option>
+                </optgroup>
                 <option value="branding">Branding Package</option>
                 <option value="other">Other</option>
               </select>

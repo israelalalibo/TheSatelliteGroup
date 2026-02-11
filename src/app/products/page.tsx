@@ -11,6 +11,13 @@ const CATEGORIES = [
   { name: "Banners & Signage", slug: "banners", count: PRODUCTS.filter((p) => p.category === "banners").length, image: "/images/products/flex-banner-warehouse.png" },
   { name: "Corporate Gifts & Branded Items", slug: "corporate-gifts", count: PRODUCTS.filter((p) => p.category === "corporate-gifts").length, image: "/images/products/heat-press-machine.png" },
   { name: "Business Cards", slug: "business-cards", count: PRODUCTS.filter((p) => p.category === "business-cards").length, image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80" },
+  { name: "Posters & Flyers", slug: "posters-flyers", count: PRODUCTS.filter((p) => p.category === "posters-flyers").length, image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80" },
+  { name: "Brochures & Catalogs", slug: "brochures-catalogs", count: PRODUCTS.filter((p) => p.category === "brochures-catalogs").length, image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&q=80" },
+  { name: "Wedding & Event Invitations", slug: "invitations", count: PRODUCTS.filter((p) => p.category === "invitations").length, image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80" },
+  { name: "Calendars", slug: "calendars", count: PRODUCTS.filter((p) => p.category === "calendars").length, image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=400&q=80" },
+  { name: "Vinyl & Stickers", slug: "stickers", count: PRODUCTS.filter((p) => p.category === "stickers").length, image: "/images/products/vinyl-sticker-rolls.png" },
+  { name: "Awards & Recognition", slug: "awards", count: PRODUCTS.filter((p) => p.category === "awards").length, image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&q=80" },
+  { name: "Signage Materials", slug: "signage-materials", count: PRODUCTS.filter((p) => p.category === "signage-materials").length, image: "/images/products/flex-banner-warehouse.png" },
 ];
 
 export const metadata = {
