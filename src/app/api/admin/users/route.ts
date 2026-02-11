@@ -11,7 +11,14 @@ export async function GET() {
   }
 
   try {
-    const db = neon(process.env.DATABASE_URL!);
+    const dbUrl = process.env.DATABASE_URL;
+    if (!dbUrl) {
+      return NextResponse.json(
+        { error: "Database not configured. Set DATABASE_URL in Vercel environment variables." },
+        { status: 503 }
+      );
+    }
+    const db = neon(dbUrl);
     const rows = await db`
       SELECT id, email, full_name, phone, account_type, role, created_at
       FROM users
@@ -60,7 +67,14 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    const db = neon(process.env.DATABASE_URL!);
+    const dbUrl = process.env.DATABASE_URL;
+    if (!dbUrl) {
+      return NextResponse.json(
+        { error: "Database not configured. Set DATABASE_URL in Vercel environment variables." },
+        { status: 503 }
+      );
+    }
+    const db = neon(dbUrl);
     await db`
       UPDATE users SET role = ${role} WHERE id = ${userId}
     `;

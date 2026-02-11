@@ -27,10 +27,10 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/admin/stats")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.orders !== undefined) {
+    fetch("/api/admin/stats", { credentials: "include" })
+      .then(async (res) => {
+        const data = await res.json();
+        if (res.ok && data.orders !== undefined) {
           setStats({
             orders: data.orders ?? 0,
             revenue: data.revenue ?? 0,
@@ -40,6 +40,7 @@ export default function AdminDashboardPage() {
           });
         }
       })
+      .catch(() => setStats({ orders: 0, revenue: 0, customers: 0, products: 0, recentOrders: [] }))
       .finally(() => setLoading(false));
   }, []);
 

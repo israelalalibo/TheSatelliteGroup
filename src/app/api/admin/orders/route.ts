@@ -11,7 +11,14 @@ export async function GET() {
   }
 
   try {
-    const db = neon(process.env.DATABASE_URL!);
+    const dbUrl = process.env.DATABASE_URL;
+    if (!dbUrl) {
+      return NextResponse.json(
+        { error: "Database not configured. Set DATABASE_URL in Vercel environment variables." },
+        { status: 503 }
+      );
+    }
+    const db = neon(dbUrl);
     const rows = await db`
       SELECT o.id, o.order_number, o.status, o.items, o.subtotal, o.delivery_fee, o.total,
              o.shipping_address, o.delivery_option, o.payment_method,

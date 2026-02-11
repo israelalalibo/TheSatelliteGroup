@@ -29,13 +29,16 @@ export default function AdminOrdersPage() {
   const [confirmingId, setConfirmingId] = useState<number | null>(null);
 
   const fetchOrders = () => {
-    fetch("/api/admin/orders")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch orders");
-        return res.json();
+    setLoading(true);
+    setError(null);
+    fetch("/api/admin/orders", { credentials: "include" })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || `Failed to fetch orders (${res.status})`);
+        }
+        setOrders(Array.isArray(data.orders) ? data.orders : []);
       })
-      .then((data) => data.orders)
-      .then(setOrders)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   };
@@ -47,6 +50,7 @@ export default function AdminOrdersPage() {
     setError(null);
     fetch(`/api/admin/orders/${orderId}`, {
       method: "PATCH",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "confirmed" }),
     })
@@ -124,7 +128,16 @@ export default function AdminOrdersPage() {
 
         {loading && <p className="text-charcoal/70">Loading orders...</p>}
         {error && (
-          <p className="rounded-lg bg-red/10 p-4 text-red">{error}</p>
+          <div className="rounded-lg bg-red/10 p-4">
+            <p className="text-red">{error}</p>
+            <button
+              type="button"
+              onClick={() => fetchOrders()}
+              className="mt-2 rounded-lg bg-red px-4 py-2 text-sm font-medium text-white hover:bg-red-dark"
+            >
+              Try again
+            </button>
+          </div>
         )}
 
         {!loading && !error && orders.length === 0 && (

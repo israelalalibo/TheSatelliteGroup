@@ -13,7 +13,7 @@ export function AdminGuard({ children }: AdminGuardProps) {
   const [status, setStatus] = useState<"loading" | "allowed" | "forbidden">("loading");
 
   useEffect(() => {
-    fetch("/api/auth/me")
+    fetch("/api/auth/me", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         if (!data.user) {

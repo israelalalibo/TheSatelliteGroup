@@ -12,7 +12,14 @@ export async function GET() {
   }
 
   try {
-    const db = neon(process.env.DATABASE_URL!);
+    const dbUrl = process.env.DATABASE_URL;
+    if (!dbUrl) {
+      return NextResponse.json(
+        { error: "Database not configured. Set DATABASE_URL in Vercel environment variables." },
+        { status: 503 }
+      );
+    }
+    const db = neon(dbUrl);
 
     const [ordersResult, usersResult] = await Promise.all([
       db`

@@ -21,13 +21,16 @@ export default function AdminUsersPage() {
   const [updatingId, setUpdatingId] = useState<number | null>(null);
 
   const fetchUsers = () => {
-    fetch("/api/admin/users")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch users");
-        return res.json();
+    setLoading(true);
+    setError(null);
+    fetch("/api/admin/users", { credentials: "include" })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || `Failed to fetch users (${res.status})`);
+        }
+        setUsers(Array.isArray(data.users) ? data.users : []);
       })
-      .then((data) => data.users)
-      .then(setUsers)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   };
@@ -39,6 +42,7 @@ export default function AdminUsersPage() {
     setError(null);
     fetch("/api/admin/users", {
       method: "PATCH",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId, role }),
     })
@@ -113,7 +117,16 @@ export default function AdminUsersPage() {
         </p>
 
         {error && (
-          <div className="mb-6 rounded-lg bg-red/10 p-4 text-red">{error}</div>
+          <div className="mb-6 rounded-lg bg-red/10 p-4">
+            <p className="text-red">{error}</p>
+            <button
+              type="button"
+              onClick={() => fetchUsers()}
+              className="mt-2 rounded-lg bg-red px-4 py-2 text-sm font-medium text-white hover:bg-red-dark"
+            >
+              Try again
+            </button>
+          </div>
         )}
 
         {loading && <p className="text-charcoal/70">Loading users...</p>}
