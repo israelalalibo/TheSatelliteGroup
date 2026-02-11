@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 
@@ -62,14 +63,16 @@ export default function RootLayout({
       className={`${inter.variable} ${outfit.variable} ${plusJakarta.variable} ${playfair.variable}`}
     >
       <body className="font-sans min-h-screen flex flex-col">
-        <CartProvider>
-          <WishlistProvider>
-            <Header />
+        <AuthProvider>
+          <CartProvider>
+            <WishlistProvider>
+              <Header />
             <main className="flex-1">{children}</main>
             <Footer />
             <WhatsAppButton />
-          </WishlistProvider>
-        </CartProvider>
+            </WishlistProvider>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

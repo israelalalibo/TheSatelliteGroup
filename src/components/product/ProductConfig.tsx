@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingCart, MessageCircle, Heart } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { DesignUpload } from "./DesignUpload";
@@ -45,6 +47,9 @@ function getUnitPrice(
 const QUANTITY_OPTIONS = [50, 100, 250, 500, 1000, 2500, 5000];
 
 export function ProductConfig({ product }: ProductConfigProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { isAuthenticated } = useAuth();
   const { addItem } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
   const inWishlist = isInWishlist(product.id);
@@ -79,9 +84,21 @@ export function ProductConfig({ product }: ProductConfigProps) {
   }, [product.options, selectedOptions]);
 
   const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      router.push(`/auth/login?redirect=${encodeURIComponent(pathname || `/products/${product.slug}`)}`);
+      return;
+    }
     addItem(product, quantity, cartOptions, Math.round(unitPrice / quantity), designFile ?? undefined);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
+  };
+
+  const handleWishlistToggle = () => {
+    if (!isAuthenticated) {
+      router.push(`/auth/login?redirect=${encodeURIComponent(pathname || `/products/${product.slug}`)}`);
+      return;
+    }
+    toggleWishlist(product.id);
   };
 
   const whatsappMessage = `Hi! I'd like to order: ${product.name}, Quantity: ${quantity}, Price: ${formatPrice(unitPrice)}`;
@@ -176,7 +193,7 @@ export function ProductConfig({ product }: ProductConfigProps) {
         </a>
         <button
           type="button"
-          onClick={() => toggleWishlist(product.id)}
+          onClick={handleWishlistToggle}
           className={`rounded-lg border-2 p-3 transition-colors ${
             inWishlist
               ? "border-red bg-red/10 text-red"

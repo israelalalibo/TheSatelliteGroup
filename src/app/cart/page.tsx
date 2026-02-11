@@ -1,13 +1,36 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ChevronRight, Minus, Plus, Trash2 } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/utils";
 
 export default function CartPage() {
+  const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
   const { items, subtotal, removeItem, updateQuantity } = useCart();
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.replace(`/auth/login?redirect=${encodeURIComponent("/cart")}`);
+    }
+  }, [isAuthenticated, isLoading, router]);
+
+  if (isLoading || !isAuthenticated) {
+    return (
+      <div className="section-padding">
+        <div className="container-custom">
+          <div className="mx-auto max-w-lg py-16 text-center text-charcoal/70">
+            Loading...
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (

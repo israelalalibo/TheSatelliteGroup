@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChevronRight, Heart, ShoppingCart, Trash2 } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 import { PRODUCTS } from "@/lib/data/products";
@@ -13,21 +14,21 @@ import type { CartItemOption } from "@/lib/types/cart";
 
 export default function WishlistPage() {
   const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
   const { productIds, removeFromWishlist } = useWishlist();
   const { addItem } = useCart();
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("satellite-user");
-    if (!stored) router.push("/auth/login");
-    setMounted(true);
-  }, [router]);
+    if (!isLoading && !isAuthenticated) {
+      router.replace("/auth/login?redirect=/account/wishlist");
+    }
+  }, [isAuthenticated, isLoading, router]);
 
-  if (!mounted) {
+  if (isLoading || !isAuthenticated) {
     return (
       <div className="section-padding">
         <div className="container-custom">
-          <div className="animate-pulse rounded-xl bg-soft-gray h-64" />
+          <div className="mx-auto max-w-lg py-16 text-center text-charcoal/70">Loading...</div>
         </div>
       </div>
     );

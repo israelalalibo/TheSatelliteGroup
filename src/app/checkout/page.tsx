@@ -1,11 +1,12 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/utils";
 import type { ShippingAddress, DeliveryOption, Order } from "@/lib/types/order";
@@ -63,8 +64,15 @@ const DELIVERY_OPTIONS: DeliveryOption[] = [
 
 export default function CheckoutPage() {
   const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
   const { items, subtotal, clearCart } = useCart();
   const [step, setStep] = useState(1);
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.replace(`/auth/login?redirect=${encodeURIComponent("/checkout")}`);
+    }
+  }, [isAuthenticated, isLoading, router]);
   const [address, setAddress] = useState<ShippingAddress>({
     fullName: "",
     email: "",
@@ -80,6 +88,16 @@ export default function CheckoutPage() {
   const [orderNotes, setOrderNotes] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [processing, setProcessing] = useState(false);
+
+  if (isLoading || !isAuthenticated) {
+    return (
+      <div className="section-padding">
+        <div className="container-custom text-center">
+          <div className="mx-auto max-w-lg py-16 text-charcoal/70">Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   if (items.length === 0 && step < 4) {
     return (

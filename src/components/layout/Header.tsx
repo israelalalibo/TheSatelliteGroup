@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, X, Phone, Mail, MapPin, ShoppingCart, Search, User, LogOut, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { SearchModal } from "@/components/ui/SearchModal";
 
@@ -25,11 +26,11 @@ const NAV_LINKS = [
 
 export function Header() {
   const router = useRouter();
-  const { lineItemCount } = useCart();
+  const { user, refreshAuth } = useAuth();
+  const { lineItemCount, clearCart } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [user, setUser] = useState<{ email?: string; fullName?: string; role?: string } | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
 
   useEffect(() => {
@@ -38,34 +39,12 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Sync from localStorage first for instant display
-    try {
-      const stored = localStorage.getItem("satellite-user");
-      if (stored) setUser(JSON.parse(stored) as { email?: string; fullName?: string; role?: string });
-    } catch {
-      setUser(null);
-    }
-    // Fetch latest from API to get current role (e.g. after admin promotion)
-    fetch("/api/auth/me")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.user) {
-          setUser(data.user);
-          localStorage.setItem("satellite-user", JSON.stringify(data.user));
-        } else {
-          setUser(null);
-        }
-      })
-      .catch(() => {});
-  }, []);
-
   const handleLogout = async () => {
-    localStorage.removeItem("satellite-user");
-    setUser(null);
     setProfileOpen(false);
     setMobileMenuOpen(false);
-    await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+    clearCart();
+    await fetch("/api/auth/logout", { method: "POST", credentials: "include" }).catch(() => {});
+    await refreshAuth();
     router.push("/");
   };
 
@@ -129,7 +108,7 @@ export function Header() {
               <Search className="h-5 w-5" />
             </button>
             <Link
-              href="/cart"
+              href={user ? "/cart" : "/auth/login?redirect=/cart"}
               className="relative hidden p-2 text-charcoal hover:text-red md:block"
               aria-label="Shopping cart"
             >
@@ -265,7 +244,7 @@ export function Header() {
             ))}
             <div className="mt-4 flex flex-col gap-2">
               <Link
-                href="/cart"
+                href={user ? "/cart" : "/auth/login?redirect=/cart"}
                 className="flex items-center gap-2 font-medium py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
