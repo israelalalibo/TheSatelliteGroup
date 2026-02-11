@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 
-export default function LoginPage() {
+function LoginForm() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/account";
   const [email, setEmail] = useState("");
@@ -104,5 +104,24 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="section-padding">
+        <div className="container-custom">
+          <nav className="mb-8 flex items-center gap-2 text-sm text-charcoal/70">
+            <Link href="/" className="hover:text-red">Home</Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-navy">Login</span>
+          </nav>
+          <div className="mx-auto max-w-md py-12 text-center text-charcoal/70">Loading...</div>
+        </div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
