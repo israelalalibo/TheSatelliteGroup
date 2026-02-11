@@ -3,11 +3,15 @@ import { neon } from "@neondatabase/serverless";
 import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET() {
   const admin = await requireAdmin();
   if (!admin) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Access denied. Log in as an admin to view orders." },
+      { status: 403 }
+    );
   }
 
   try {

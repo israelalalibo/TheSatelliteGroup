@@ -23,16 +23,27 @@ export default function AdminUsersPage() {
   const fetchUsers = () => {
     setLoading(true);
     setError(null);
-    fetch("/api/admin/users", { credentials: "include" })
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    fetch("/api/admin/users", { credentials: "include", signal: controller.signal })
       .then(async (res) => {
-        const data = await res.json();
+        const text = await res.text();
+        let data: { users?: unknown[]; error?: string } = {};
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch {
+          throw new Error(res.ok ? "Invalid response" : `Server error (${res.status})`);
+        }
         if (!res.ok) {
           throw new Error(data.error || `Failed to fetch users (${res.status})`);
         }
         setUsers(Array.isArray(data.users) ? data.users : []);
       })
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+      .catch((e) => setError(e.name === "AbortError" ? "Request timed out. Please try again." : e.message))
+      .finally(() => {
+        clearTimeout(timeout);
+        setLoading(false);
+      });
   };
 
   useEffect(() => fetchUsers, []);
@@ -117,15 +128,25 @@ export default function AdminUsersPage() {
         </p>
 
         {error && (
-          <div className="mb-6 rounded-lg bg-red/10 p-4">
-            <p className="text-red">{error}</p>
-            <button
-              type="button"
-              onClick={() => fetchUsers()}
-              className="mt-2 rounded-lg bg-red px-4 py-2 text-sm font-medium text-white hover:bg-red-dark"
-            >
-              Try again
-            </button>
+          <div className="mb-6 rounded-lg border border-red/30 bg-red/10 p-4">
+            <p className="font-medium text-red">{error}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => fetchUsers()}
+                className="rounded-lg bg-red px-4 py-2 text-sm font-medium text-white hover:bg-red-dark"
+              >
+                Try again
+              </button>
+              {error.toLowerCase().includes("access denied") && (
+                <Link
+                  href="/auth/login?redirect=/admin/users"
+                  className="rounded-lg border border-red px-4 py-2 text-sm font-medium text-red hover:bg-red/10"
+                >
+                  Log in again
+                </Link>
+              )}
+            </div>
           </div>
         )}
 

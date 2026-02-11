@@ -31,16 +31,27 @@ export default function AdminOrdersPage() {
   const fetchOrders = () => {
     setLoading(true);
     setError(null);
-    fetch("/api/admin/orders", { credentials: "include" })
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    fetch("/api/admin/orders", { credentials: "include", signal: controller.signal })
       .then(async (res) => {
-        const data = await res.json();
+        const text = await res.text();
+        let data: { orders?: unknown[]; error?: string } = {};
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch {
+          throw new Error(res.ok ? "Invalid response" : `Server error (${res.status})`);
+        }
         if (!res.ok) {
           throw new Error(data.error || `Failed to fetch orders (${res.status})`);
         }
         setOrders(Array.isArray(data.orders) ? data.orders : []);
       })
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+      .catch((e) => setError(e.name === "AbortError" ? "Request timed out. Please try again." : e.message))
+      .finally(() => {
+        clearTimeout(timeout);
+        setLoading(false);
+      });
   };
 
   useEffect(() => fetchOrders, []);
@@ -128,15 +139,25 @@ export default function AdminOrdersPage() {
 
         {loading && <p className="text-charcoal/70">Loading orders...</p>}
         {error && (
-          <div className="rounded-lg bg-red/10 p-4">
-            <p className="text-red">{error}</p>
-            <button
-              type="button"
-              onClick={() => fetchOrders()}
-              className="mt-2 rounded-lg bg-red px-4 py-2 text-sm font-medium text-white hover:bg-red-dark"
-            >
-              Try again
-            </button>
+          <div className="rounded-lg border border-red/30 bg-red/10 p-4">
+            <p className="font-medium text-red">{error}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => fetchOrders()}
+                className="rounded-lg bg-red px-4 py-2 text-sm font-medium text-white hover:bg-red-dark"
+              >
+                Try again
+              </button>
+              {error.toLowerCase().includes("access denied") && (
+                <Link
+                  href="/auth/login?redirect=/admin/orders"
+                  className="rounded-lg border border-red px-4 py-2 text-sm font-medium text-red hover:bg-red/10"
+                >
+                  Log in again
+                </Link>
+              )}
+            </div>
           </div>
         )}
 
