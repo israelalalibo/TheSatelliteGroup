@@ -112,7 +112,7 @@ export function Header() {
               aria-label="Shopping cart"
             >
               <ShoppingCart className="h-5 w-5" />
-              {lineItemCount > 0 && (
+              {user && lineItemCount > 0 && (
                 <span className="absolute -right-1 -top-1 flex h-4 w-4 min-w-[1rem] items-center justify-center rounded-full bg-red px-1 text-xs font-bold text-navy">
                   {lineItemCount > 99 ? "99+" : lineItemCount}
                 </span>
@@ -248,7 +248,7 @@ export function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <ShoppingCart className="h-5 w-5" />
-                Cart {lineItemCount > 0 && `(${lineItemCount})`}
+                Cart {user && lineItemCount > 0 && `(${lineItemCount})`}
               </Link>
               {user ? (
                 <>
