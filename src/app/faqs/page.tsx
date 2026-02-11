@@ -52,7 +52,7 @@ const FAQ_CATEGORIES = [
       },
       {
         q: "Can I pick up my order?",
-        a: "Yes, pickup is free from our Asaba office: Opposite Tacjo Filling Station, by Asaba Modern Mechanic Village, along Asaba-Benin Express Way.",
+        a: "Yes, pickup is free from our Asaba office: Opposite Tac Joe filling station, Asaba Benin Express Way, beside mechanic village.",
       },
     ],
   },

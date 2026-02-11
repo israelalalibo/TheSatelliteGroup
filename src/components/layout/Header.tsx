@@ -9,8 +9,8 @@ import { useCart } from "@/context/CartContext";
 import { SearchModal } from "@/components/ui/SearchModal";
 
 const TOP_LINKS = [
-  { href: "tel:+2348012345678", icon: Phone, text: "+234 801 234 5678" },
-  { href: "mailto:info@satelitegroup.com", icon: Mail, text: "info@satelitegroup.com" },
+  { href: "tel:+2348102652650", icon: Phone, text: "+234 810 265 2650" },
+  { href: "mailto:info@satelitechuksgroup.com", icon: Mail, text: "info@satelitechuksgroup.com" },
   { href: "#", icon: MapPin, text: "Asaba, Delta State" },
 ];
 
@@ -101,7 +101,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="font-heading text-xl font-bold text-navy md:text-2xl">
-              Satelite<span className="text-red">Group</span>
+              Satelitechuks<span className="text-red"> Group</span>
             </span>
           </Link>
 

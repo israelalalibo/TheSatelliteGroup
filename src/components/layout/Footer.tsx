@@ -44,7 +44,7 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-block">
               <span className="font-heading text-xl font-bold">
-                Satelite<span className="text-red">Group</span>
+                Satelitechuks<span className="text-red"> Group</span>
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/80">
@@ -104,17 +104,20 @@ export function Footer() {
             <h4 className="font-semibold text-red">Contact Us</h4>
             <ul className="mt-4 space-y-3 text-sm text-white/80">
               <li>
-                Opposite Tacjo Filling Station, by Asaba Modern Mechanic Village, along
-                Asaba-Benin Express Way, Asaba, Delta State, Nigeria
+                Opposite Tac Joe filling station, Asaba Benin Express Way, beside mechanic village
               </li>
               <li>
-                <a href="tel:+2348012345678" className="hover:text-red">
-                  +234 801 234 5678
+                <a href="tel:+2348102652650" className="hover:text-red">
+                  +234 810 265 2650
+                </a>
+                {" · "}
+                <a href="tel:+2348033250403" className="hover:text-red">
+                  +234 803 325 0403
                 </a>
               </li>
               <li>
-                <a href="mailto:info@satelitegroup.com" className="hover:text-red">
-                  info@satelitegroup.com
+                <a href="mailto:info@satelitechuksgroup.com" className="hover:text-red">
+                  info@satelitechuksgroup.com
                 </a>
               </li>
               <li>Mon - Sat: 8AM - 6PM</li>
@@ -127,7 +130,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-custom flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
           <p className="text-sm text-white/60">
-            © {new Date().getFullYear()} Satelite Group. All rights reserved.
+            © {new Date().getFullYear()} Satelitechuks Group. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/terms" className="text-white/60 hover:text-red">

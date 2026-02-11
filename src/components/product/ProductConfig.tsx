@@ -166,7 +166,7 @@ export function ProductConfig({ product }: ProductConfigProps) {
           {added ? "Added to Cart!" : "Add to Cart"}
         </button>
         <a
-          href={`https://wa.me/2348012345678?text=${encodeURIComponent(whatsappMessage)}`}
+          href={`https://wa.me/2348102652650?text=${encodeURIComponent(whatsappMessage)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-secondary flex items-center justify-center gap-2"

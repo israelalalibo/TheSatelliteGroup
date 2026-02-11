@@ -1,6 +1,6 @@
-# Satelite Group — Premium Printing & Branding Website
+# Satelitechuks Group — Premium Printing & Branding Website
 
-A production-ready, modern e-commerce website for Satelite Group — a premium printing and branding company in Asaba, Delta State, Nigeria.
+A production-ready, modern e-commerce website for Satelitechuks Group — a premium printing and branding company in Asaba, Delta State, Nigeria.
 
 ## 🚀 Tech Stack
 
@@ -110,9 +110,8 @@ npm start
 
 ## 📞 Contact
 
-**Satelite Group**
-Opposite Tacjo Filling Station, by Asaba Modern Mechanic Village,
-along Asaba-Benin Express Way, Asaba, Delta State, Nigeria
+**Satelitechuks Group**
+Opposite Tac Joe filling station, Asaba Benin Express Way, beside mechanic village
 
-- Phone: +234 801 234 5678
-- Email: info@satelitegroup.com
+- Phone: +234 810 265 2650, +234 803 325 0403
+- Email: info@satelitechuksgroup.com

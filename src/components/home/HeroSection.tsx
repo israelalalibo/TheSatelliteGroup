@@ -31,7 +31,7 @@ export function HeroSection() {
       <div className="absolute inset-0">
         <Image
           src="/images/products/flex-banner-warehouse.png"
-          alt="Satelite Group — printing machines, raw materials, and branding"
+          alt="Satelitechuks Group — printing machines, raw materials, and branding"
           fill
           priority
           className="object-cover"

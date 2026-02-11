@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 export const metadata = {
-  title: "Return & Refund Policy | Satelite Group",
-  description: "Return and refund policy for Satelite Group printing services.",
+  title: "Return & Refund Policy | Satelitechuks Group",
+  description: "Return and refund policy for Satelitechuks Group printing services.",
 };
 
 export default function ReturnsPage() {
@@ -38,7 +38,7 @@ export default function ReturnsPage() {
           </p>
           <h2 className="font-heading text-xl font-bold text-navy">Contact</h2>
           <p>
-            info@satelitegroup.com, +234 801 234 5678.
+            info@satelitechuksgroup.com, +234 810 265 2650.
           </p>
         </div>
       </div>

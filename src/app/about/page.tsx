@@ -10,8 +10,8 @@ const VALUES = [
 ];
 
 export const metadata = {
-  title: "About Us | Satelite Group - Premium Printing Nigeria",
-  description: "Learn about Satelite Group - your trusted partner for premium printing and branding in Nigeria since our founding.",
+  title: "About Us | Satelitechuks Group - Premium Printing Nigeria",
+  description: "Learn about Satelitechuks Group - your trusted partner for premium printing and branding in Nigeria since our founding.",
 };
 
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
         <div className="absolute inset-0">
           <Image
             src="/images/products/large-format-plotter.png"
-            alt="Satelite Group - Printing Machines & Branding"
+            alt="Satelitechuks Group - Printing Machines & Branding"
             fill
             className="object-cover"
             priority
@@ -55,7 +55,7 @@ export default function AboutPage() {
               </h2>
               <div className="mt-6 space-y-4 text-charcoal/90 leading-relaxed">
                 <p>
-                  Satelite Group is a premier printing and branding company based in Asaba,
+                  Satelitechuks Group is a premier printing and branding company based in Asaba,
                   Delta State, Nigeria. Strategically located along the Asaba-Benin Express
                   Way, we serve businesses, corporations, event planners, individuals,
                   government agencies, NGOs, and institutions across Nigeria.

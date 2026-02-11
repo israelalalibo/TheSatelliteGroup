@@ -70,7 +70,7 @@ The app is a **static/Node** Next.js app. No database is required for the curren
 2. Sign up at [vercel.com](https://vercel.com) and **Import** the repo.
 3. Set env var: `NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY` = live key.
 4. Deploy. Vercel assigns a URL (e.g. `satellite-group.vercel.app`).
-5. Add **custom domain** in Vercel (e.g. `www.satelitegroup.com`) and point DNS as instructed.
+5. Add **custom domain** in Vercel (e.g. `www.satelitechuksgroup.com`) and point DNS as instructed.
 
 **Handover:** Give the customer the Vercel login (or add them as a team member) so they can see deployments and env vars (without exposing the key value if you use “sensitive” marking).
 

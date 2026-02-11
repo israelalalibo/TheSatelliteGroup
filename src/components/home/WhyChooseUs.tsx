@@ -41,7 +41,7 @@ export function WhyChooseUs() {
           className="text-center"
         >
           <h2 className="font-heading text-section font-bold">
-            Why Businesses Trust Satelite Group
+            Why Businesses Trust Satelitechuks Group
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/80">
             We combine quality, speed, and expertise to deliver printing solutions that

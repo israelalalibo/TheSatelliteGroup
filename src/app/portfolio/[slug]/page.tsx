@@ -11,9 +11,9 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const item = getPortfolioItemBySlug(slug);
-  if (!item) return { title: "Portfolio | Satelite Group" };
+  if (!item) return { title: "Portfolio | Satelitechuks Group" };
   return {
-    title: `${item.title} | Portfolio | Satelite Group`,
+    title: `${item.title} | Portfolio | Satelitechuks Group`,
     description: item.description,
   };
 }

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 export const metadata = {
-  title: "Terms & Conditions | Satelite Group",
-  description: "Terms and conditions for Satelite Group printing and branding services.",
+  title: "Terms & Conditions | Satelitechuks Group",
+  description: "Terms and conditions for Satelitechuks Group printing and branding services.",
 };
 
 export default function TermsPage() {
@@ -23,12 +23,12 @@ export default function TermsPage() {
         <div className="prose prose-navy max-w-3xl space-y-6 text-charcoal/80">
           <p className="text-sm text-charcoal/60">Last updated: February 2026</p>
           <p>
-            Welcome to Satelite Group. By using our website and services, you agree to these Terms
+            Welcome to Satelitechuks Group. By using our website and services, you agree to these Terms
             and Conditions. Please read them carefully.
           </p>
           <h2 className="font-heading text-xl font-bold text-navy">1. Services</h2>
           <p>
-            Satelite Group provides premium printing, branding, and corporate gifting services. Our
+            Satelitechuks Group provides premium printing, branding, and corporate gifting services. Our
             services are subject to availability and we reserve the right to refuse orders at our
             discretion.
           </p>
@@ -51,8 +51,7 @@ export default function TermsPage() {
           </p>
           <h2 className="font-heading text-xl font-bold text-navy">5. Contact</h2>
           <p>
-            For questions about these terms, contact us at info@satelitegroup.com or +234 801 234
-            5678.
+            For questions about these terms, contact us at info@satelitechuksgroup.com or +234 810 265 2650.
           </p>
         </div>
       </div>

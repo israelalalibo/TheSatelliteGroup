@@ -3,8 +3,8 @@ import { ChevronRight, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 
 export const metadata = {
-  title: "Contact Us | Satelite Group - Premium Printing Nigeria",
-  description: "Get in touch with Satelite Group for printing and branding services. Located in Asaba, Delta State, Nigeria.",
+  title: "Contact Us | Satelitechuks Group - Premium Printing Nigeria",
+  description: "Get in touch with Satelitechuks Group for printing and branding services. Located in Asaba, Delta State, Nigeria.",
 };
 
 export default function ContactPage() {
@@ -43,8 +43,8 @@ export default function ContactPage() {
                   <div>
                     <p className="font-medium">Address</p>
                     <p className="mt-1 text-sm text-white/80">
-                      Opposite Tacjo Filling Station, by Asaba Modern Mechanic Village,
-                      along Asaba-Benin Express Way, Asaba, Delta State, Nigeria
+                      Opposite Tac Joe filling station, Asaba Benin Express Way,
+                      beside mechanic village
                     </p>
                   </div>
                 </li>
@@ -52,17 +52,18 @@ export default function ContactPage() {
                   <Phone className="h-6 w-6 shrink-0 text-red" />
                   <div>
                     <p className="font-medium">Phone</p>
-                    <a href="tel:+2348012345678" className="mt-1 block text-sm text-white/80 hover:text-red">
-                      +234 801 234 5678
-                    </a>
+                    <div className="mt-1 space-y-1 text-sm text-white/80">
+                      <a href="tel:+2348102652650" className="block hover:text-red">+234 810 265 2650</a>
+                      <a href="tel:+2348033250403" className="block hover:text-red">+234 803 325 0403</a>
+                    </div>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <Mail className="h-6 w-6 shrink-0 text-red" />
                   <div>
                     <p className="font-medium">Email</p>
-                    <a href="mailto:info@satelitegroup.com" className="mt-1 block text-sm text-white/80 hover:text-red">
-                      info@satelitegroup.com
+                    <a href="mailto:info@satelitechuksgroup.com" className="mt-1 block text-sm text-white/80 hover:text-red">
+                      info@satelitechuksgroup.com
                     </a>
                   </div>
                 </li>
@@ -73,7 +74,7 @@ export default function ContactPage() {
             </div>
 
             <a
-              href="https://wa.me/2348012345678"
+              href="https://wa.me/2348102652650"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-4 font-semibold text-white transition-colors hover:bg-[#20BD5A]"

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ChevronRight, Truck, MapPin, Clock } from "lucide-react";
 
 export const metadata = {
-  title: "Shipping & Delivery | Satelite Group",
-  description: "Shipping and delivery information for Satelite Group.",
+  title: "Shipping & Delivery | Satelitechuks Group",
+  description: "Shipping and delivery information for Satelitechuks Group.",
 };
 
 export default function ShippingPage() {
@@ -34,7 +34,7 @@ export default function ShippingPage() {
           <div className="rounded-xl border border-charcoal/10 bg-white p-6 shadow-sm">
             <MapPin className="h-12 w-12 text-red" />
             <h2 className="mt-4 font-heading text-lg font-bold text-navy">Pickup (Free)</h2>
-            <p className="mt-2 text-charcoal/80">Pick up from our Asaba office. Opposite Tacjo Filling Station, by Asaba Modern Mechanic Village.</p>
+            <p className="mt-2 text-charcoal/80">Pick up from our Asaba office. Opposite Tac Joe filling station, Asaba Benin Express Way, beside mechanic village.</p>
           </div>
         </div>
 
