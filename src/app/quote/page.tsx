@@ -19,13 +19,38 @@ export default function QuoteRequestPage() {
   const [file, setFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setSubmitError(null);
     try {
-      await new Promise((r) => setTimeout(r, 1000));
+      const formData = new FormData();
+      formData.set("fullName", form.fullName);
+      formData.set("email", form.email);
+      formData.set("phone", form.phone);
+      formData.set("company", form.company);
+      formData.set("service", form.service);
+      formData.set("quantity", form.quantity);
+      formData.set("deadline", form.deadline);
+      formData.set("designStatus", form.designStatus);
+      formData.set("message", form.message);
+      if (file) formData.set("file", file);
+
+      const res = await fetch("/api/quotes", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSubmitError(data.error || "Failed to submit. Please try again.");
+        return;
+      }
       setSubmitted(true);
+    } catch {
+      setSubmitError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -70,6 +95,9 @@ export default function QuoteRequestPage() {
           </p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-6 rounded-xl border border-charcoal/10 bg-white p-6 shadow-sm md:p-8">
+            {submitError && (
+              <div className="rounded-lg bg-red/10 p-4 text-sm text-red">{submitError}</div>
+            )}
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block font-medium text-navy">Full Name *</label>

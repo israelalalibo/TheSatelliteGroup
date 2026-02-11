@@ -74,5 +74,22 @@ export async function initDatabase() {
     )
   `;
 
+  await db`
+    CREATE TABLE IF NOT EXISTS quote_requests (
+      id SERIAL PRIMARY KEY,
+      full_name TEXT NOT NULL,
+      email TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      company TEXT,
+      service TEXT NOT NULL,
+      quantity TEXT,
+      deadline DATE,
+      design_status TEXT NOT NULL CHECK (design_status IN ('have', 'need')),
+      message TEXT NOT NULL,
+      file_url TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `;
+
   return { success: true };
 }

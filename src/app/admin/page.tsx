@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronRight, Package, ShoppingCart, Users, BarChart3 } from "lucide-react";
+import { ChevronRight, Package, ShoppingCart, Users, BarChart3, FileText } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 
 interface DashboardStats {
@@ -89,6 +89,13 @@ export default function AdminDashboardPage() {
           >
             <Users className="h-5 w-5" />
             Users & Roles
+          </Link>
+          <Link
+            href="/admin/quotes"
+            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
+          >
+            <FileText className="h-5 w-5" />
+            Quote Requests
           </Link>
         </nav>
       </aside>

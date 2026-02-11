@@ -108,6 +108,12 @@ export default function AdminUsersPage() {
             <Users className="h-5 w-5" />
             Users & Roles
           </Link>
+          <Link
+            href="/admin/quotes"
+            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
+          >
+            Quote Requests
+          </Link>
         </nav>
       </aside>
 
