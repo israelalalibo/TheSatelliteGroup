@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Menu, X, Phone, Mail, MapPin, ShoppingCart, Search, User, LogOut } from "lucide-react";
+import { Menu, X, Phone, Mail, MapPin, ShoppingCart, Search, User, LogOut, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import { SearchModal } from "@/components/ui/SearchModal";
@@ -29,7 +29,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [user, setUser] = useState<{ email?: string; fullName?: string } | null>(null);
+  const [user, setUser] = useState<{ email?: string; fullName?: string; role?: string } | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
 
   useEffect(() => {
@@ -39,12 +39,25 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    // Sync from localStorage first for instant display
     try {
       const stored = localStorage.getItem("satellite-user");
-      setUser(stored ? (JSON.parse(stored) as { email?: string; fullName?: string }) : null);
+      if (stored) setUser(JSON.parse(stored) as { email?: string; fullName?: string; role?: string });
     } catch {
       setUser(null);
     }
+    // Fetch latest from API to get current role (e.g. after admin promotion)
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.user) {
+          setUser(data.user);
+          localStorage.setItem("satellite-user", JSON.stringify(data.user));
+        } else {
+          setUser(null);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const handleLogout = async () => {
@@ -146,6 +159,16 @@ export function Header() {
                       onClick={() => setProfileOpen(false)}
                     />
                     <div className="absolute right-0 top-full z-20 mt-2 w-48 rounded-lg border border-charcoal/10 bg-white py-1 shadow-lg">
+                      {user.role === "admin" && (
+                        <Link
+                          href="/admin"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-red font-medium hover:bg-red/10"
+                          onClick={() => setProfileOpen(false)}
+                        >
+                          <Shield className="h-4 w-4" />
+                          Admin Dashboard
+                        </Link>
+                      )}
                       <Link
                         href="/account"
                         className="block px-4 py-2 text-sm text-navy hover:bg-soft-gray"
@@ -251,6 +274,16 @@ export function Header() {
               </Link>
               {user ? (
                 <>
+                  {user.role === "admin" && (
+                    <Link
+                      href="/admin"
+                      className="flex items-center gap-2 font-medium py-2 border-b border-soft-gray text-red"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Shield className="h-5 w-5" />
+                      Admin Dashboard
+                    </Link>
+                  )}
                   <Link
                     href="/account"
                     className="flex items-center gap-2 font-medium py-2 border-b border-soft-gray"

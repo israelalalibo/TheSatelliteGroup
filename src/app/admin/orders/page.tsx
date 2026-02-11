@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronRight, ExternalLink, Receipt, FileImage } from "lucide-react";
+import { ChevronRight, ExternalLink, Receipt, FileImage, CheckCircle } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 
 interface Order {
@@ -26,8 +26,9 @@ export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [confirmingId, setConfirmingId] = useState<number | null>(null);
 
-  useEffect(() => {
+  const fetchOrders = () => {
     fetch("/api/admin/orders")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch orders");
@@ -37,7 +38,28 @@ export default function AdminOrdersPage() {
       .then(setOrders)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, []);
+  };
+
+  useEffect(() => fetchOrders, []);
+
+  const confirmOrder = (orderId: number) => {
+    setConfirmingId(orderId);
+    setError(null);
+    fetch(`/api/admin/orders/${orderId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "confirmed" }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to confirm");
+        setOrders((prev) =>
+          prev.map((o) => (o.id === orderId ? { ...o, status: "confirmed" } : o))
+        );
+      })
+      .catch((e) => setError(e.message))
+      .finally(() => setConfirmingId(null));
+  };
 
   const formatDate = (dateStr: string) => {
     try {
@@ -125,7 +147,7 @@ export default function AdminOrdersPage() {
                         Order #{order.orderNumber}
                       </h2>
                       <span
-                        className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                        className={`rounded-full px-2 py-0.5 text-xs font-medium capitalize ${
                           order.status === "confirmed"
                             ? "bg-success/20 text-success"
                             : order.status === "cancelled"
@@ -169,8 +191,19 @@ export default function AdminOrdersPage() {
                     </div>
                   </div>
 
-                  {/* Receipt section */}
+                  {/* Receipt section & actions */}
                   <div className="flex flex-col gap-2 shrink-0">
+                    {order.status === "pending" && (
+                      <button
+                        type="button"
+                        onClick={() => confirmOrder(order.id)}
+                        disabled={confirmingId === order.id}
+                        className="inline-flex items-center gap-2 rounded-lg bg-success/20 px-4 py-2 font-medium text-success hover:bg-success/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <CheckCircle className="h-4 w-4" />
+                        {confirmingId === order.id ? "Confirming..." : "Confirm Order"}
+                      </button>
+                    )}
                     {order.receiptUrl ? (
                       <>
                         <a
