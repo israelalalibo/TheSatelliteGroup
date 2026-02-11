@@ -75,6 +75,21 @@ export async function initDatabase() {
   `;
 
   await db`
+    CREATE TABLE IF NOT EXISTS cart_items (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      item_id TEXT NOT NULL,
+      product_id TEXT NOT NULL,
+      quantity INTEGER NOT NULL,
+      selected_options JSONB NOT NULL DEFAULT '[]',
+      unit_price INTEGER NOT NULL,
+      design_file JSONB,
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      UNIQUE(user_id, item_id)
+    )
+  `;
+
+  await db`
     CREATE TABLE IF NOT EXISTS quote_requests (
       id SERIAL PRIMARY KEY,
       full_name TEXT NOT NULL,

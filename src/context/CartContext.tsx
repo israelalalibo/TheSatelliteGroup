@@ -6,11 +6,13 @@ import {
   useReducer,
   useEffect,
   useCallback,
+  useRef,
   type ReactNode,
 } from "react";
 import type { Product } from "@/lib/data/products";
 import type { CartItem, CartItemOption } from "@/lib/types/cart";
 import { generateCartItemId } from "@/lib/types/cart";
+import { useAuth } from "@/context/AuthContext";
 
 interface CartState {
   items: CartItem[];
@@ -61,9 +63,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
 interface CartContextValue extends CartState {
   subtotal: number;
-  /** Total quantity across all line items (e.g. 100 units) */
   itemCount: number;
-  /** Number of distinct line items in the cart (e.g. 1 item) */
   lineItemCount: number;
   addItem: (
     product: Product,
@@ -79,30 +79,95 @@ interface CartContextValue extends CartState {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+function serializeForStorage(items: CartItem[]): string {
+  return JSON.stringify(items);
+}
+
+function serializeForApi(items: CartItem[]) {
+  return items.map((i) => ({
+    id: i.id,
+    productId: i.product.id,
+    quantity: i.quantity,
+    selectedOptions: i.selectedOptions,
+    unitPrice: i.unitPrice,
+    designFile: i.designFile ?? undefined,
+  }));
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { isAuthenticated } = useAuth();
   const [state, dispatch] = useReducer(cartReducer, { items: [] });
+  const hasMergedRef = useRef(false);
+  const hasLoadedRef = useRef(false);
 
+  // Load cart: from API when logged in, from localStorage when not
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(CART_STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored) as CartItem[];
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          dispatch({ type: "LOAD_CART", items: parsed });
+    hasLoadedRef.current = false;
+    if (isAuthenticated) {
+      fetch("/api/cart", { credentials: "include" })
+        .then((res) => res.json())
+        .then((data) => {
+          const items = Array.isArray(data.items) ? data.items : [];
+          dispatch({ type: "LOAD_CART", items });
+          hasLoadedRef.current = true;
+          // If API returned empty but we have local items, merge them to DB
+          if (items.length === 0 && !hasMergedRef.current) {
+            try {
+              const stored = localStorage.getItem(CART_STORAGE_KEY);
+              if (stored) {
+                const parsed = JSON.parse(stored) as CartItem[];
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                  hasMergedRef.current = true;
+                  dispatch({ type: "LOAD_CART", items: parsed });
+                  fetch("/api/cart", {
+                    method: "PUT",
+                    credentials: "include",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ items: serializeForApi(parsed) }),
+                  }).catch(() => {});
+                }
+              }
+            } catch {
+              // ignore
+            }
+          }
+        })
+        .catch(() => {
+          hasLoadedRef.current = true;
+        });
+    } else {
+      try {
+        const stored = localStorage.getItem(CART_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored) as CartItem[];
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            dispatch({ type: "LOAD_CART", items: parsed });
+          }
         }
+      } catch {
+        // ignore
       }
-    } catch {
-      // Ignore parse errors
+      hasLoadedRef.current = true;
     }
-  }, []);
+  }, [isAuthenticated]);
 
+  // Persist: sync to API when logged in (after initial load), always save to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.items));
+      localStorage.setItem(CART_STORAGE_KEY, serializeForStorage(state.items));
     } catch {
-      // Ignore storage errors
+      // ignore
     }
-  }, [state.items]);
+
+    if (isAuthenticated && hasLoadedRef.current) {
+      fetch("/api/cart", {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: serializeForApi(state.items) }),
+      }).catch(() => {});
+    }
+  }, [state.items, isAuthenticated]);
 
   const addItem = useCallback(
     (

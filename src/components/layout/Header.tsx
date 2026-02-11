@@ -27,7 +27,7 @@ const NAV_LINKS = [
 export function Header() {
   const router = useRouter();
   const { user, refreshAuth } = useAuth();
-  const { lineItemCount, clearCart } = useCart();
+  const { lineItemCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -42,7 +42,6 @@ export function Header() {
   const handleLogout = async () => {
     setProfileOpen(false);
     setMobileMenuOpen(false);
-    clearCart();
     await fetch("/api/auth/logout", { method: "POST", credentials: "include" }).catch(() => {});
     await refreshAuth();
     router.push("/");
