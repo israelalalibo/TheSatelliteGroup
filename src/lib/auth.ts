@@ -11,6 +11,7 @@ export interface SessionUser {
   fullName: string | null;
   phone: string | null;
   accountType: string;
+  role: "user" | "admin";
 }
 
 /**
@@ -48,19 +49,31 @@ export async function getSession(): Promise<SessionUser | null> {
   try {
     const db = getDb();
     const rows = await db`
-      SELECT id, email, full_name, phone, account_type
+      SELECT id, email, full_name, phone, account_type, role
       FROM users WHERE id = ${userId}
     `;
     if (rows.length === 0) return null;
     const u = rows[0];
+    const role = (u.role as string) === "admin" ? "admin" : "user";
     return {
       id: u.id as number,
       email: u.email as string,
       fullName: u.full_name as string | null,
       phone: u.phone as string | null,
       accountType: (u.account_type as string) ?? "individual",
+      role,
     };
   } catch {
     return null;
   }
+}
+
+/**
+ * Get session and require admin role. Returns null if not logged in or not admin.
+ * Use with API routes: if (!(await requireAdmin())) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+ */
+export async function requireAdmin(): Promise<SessionUser | null> {
+  const user = await getSession();
+  if (!user || user.role !== "admin") return null;
+  return user;
 }

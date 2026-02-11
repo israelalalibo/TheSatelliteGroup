@@ -33,9 +33,17 @@ export async function initDatabase() {
       full_name TEXT,
       phone TEXT,
       account_type TEXT DEFAULT 'individual',
+      role TEXT DEFAULT 'user' CHECK (role IN ('user', 'admin')),
       created_at TIMESTAMPTZ DEFAULT NOW()
     )
   `;
+
+  // Migration: add role column if it doesn't exist (for existing installs)
+  try {
+    await db`ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user'`;
+  } catch {
+    // Column already exists, ignore
+  }
 
   await db`
     CREATE TABLE IF NOT EXISTS orders (

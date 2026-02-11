@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 
 export default function LoginPage() {
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/account";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,7 +29,7 @@ export default function LoginPage() {
         return;
       }
       localStorage.setItem("satellite-user", JSON.stringify(data.user));
-      window.location.href = "/account";
+      window.location.href = redirectTo.startsWith("/") ? redirectTo : "/account";
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

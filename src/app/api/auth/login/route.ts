@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     const db = neon(process.env.DATABASE_URL!);
     const rows = await db`
-      SELECT id, email, password_hash, full_name, phone, account_type
+      SELECT id, email, password_hash, full_name, phone, account_type, role
       FROM users WHERE email = ${email.toLowerCase()}
     `;
 
@@ -30,8 +30,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
     }
 
+    // Bootstrap: if FIRST_ADMIN_EMAIL matches and no admins exist, promote this user
+    const firstAdminEmail = process.env.FIRST_ADMIN_EMAIL?.toLowerCase();
+    const admins = await db`SELECT id FROM users WHERE role = 'admin'`;
+    if (
+      firstAdminEmail &&
+      (user.email as string).toLowerCase() === firstAdminEmail &&
+      admins.length === 0
+    ) {
+      await db`UPDATE users SET role = 'admin' WHERE id = ${user.id}`;
+      user.role = "admin";
+    }
+
     await createSession(user.id as number);
 
+    const role = (user.role as string) === "admin" ? "admin" : "user";
     return NextResponse.json({
       user: {
         id: user.id,
@@ -39,6 +52,7 @@ export async function POST(req: NextRequest) {
         fullName: user.full_name,
         phone: user.phone,
         accountType: user.account_type,
+        role,
       },
     });
   } catch (error) {

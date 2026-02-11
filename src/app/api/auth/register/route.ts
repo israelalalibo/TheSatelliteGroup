@@ -29,15 +29,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "An account with this email already exists" }, { status: 409 });
     }
 
+    // Bootstrap: if FIRST_ADMIN_EMAIL matches and no admins exist, make this user admin
+    const firstAdminEmail = process.env.FIRST_ADMIN_EMAIL?.toLowerCase();
+    const admins = await db`SELECT id FROM users WHERE role = 'admin'`;
+    const isFirstAdmin =
+      firstAdminEmail &&
+      email.toLowerCase() === firstAdminEmail &&
+      admins.length === 0;
+
     const passwordHash = await bcrypt.hash(password, 10);
     const rows = await db`
-      INSERT INTO users (email, password_hash, full_name, phone, account_type)
-      VALUES (${email.toLowerCase()}, ${passwordHash}, ${fullName ?? null}, ${phone ?? null}, ${accountType ?? "individual"})
-      RETURNING id, email, full_name, phone, account_type
+      INSERT INTO users (email, password_hash, full_name, phone, account_type, role)
+      VALUES (${email.toLowerCase()}, ${passwordHash}, ${fullName ?? null}, ${phone ?? null}, ${accountType ?? "individual"}, ${isFirstAdmin ? "admin" : "user"})
+      RETURNING id, email, full_name, phone, account_type, role
     `;
 
     const user = rows[0];
     await createSession(user.id as number);
+    const role = (user.role as string) === "admin" ? "admin" : "user";
 
     return NextResponse.json({
       user: {
@@ -46,6 +55,7 @@ export async function POST(req: NextRequest) {
         fullName: user.full_name,
         phone: user.phone,
         accountType: user.account_type,
+        role,
       },
     });
   } catch (error) {

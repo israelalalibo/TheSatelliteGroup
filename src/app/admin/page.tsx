@@ -55,11 +55,11 @@ export default function AdminDashboardPage() {
             Products
           </Link>
           <Link
-            href="/admin/customers"
+            href="/admin/users"
             className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
           >
             <Users className="h-5 w-5" />
-            Customers
+            Users & Roles
           </Link>
         </nav>
       </aside>
