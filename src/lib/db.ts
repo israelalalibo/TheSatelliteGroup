@@ -83,8 +83,8 @@ export async function initDatabase() {
       company TEXT,
       service TEXT NOT NULL,
       quantity TEXT,
-      deadline DATE,
-      design_status TEXT NOT NULL CHECK (design_status IN ('have', 'need')),
+      deadline TEXT,
+      design_status TEXT NOT NULL,
       message TEXT NOT NULL,
       file_url TEXT,
       created_at TIMESTAMPTZ DEFAULT NOW()

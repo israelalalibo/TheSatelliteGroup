@@ -77,47 +77,7 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-soft-gray">
-      <aside className="fixed left-0 top-0 z-40 h-full w-64 bg-navy text-white">
-        <div className="flex h-16 items-center justify-between border-b border-white/10 px-4">
-          <span className="font-heading font-bold">Admin</span>
-        </div>
-        <nav className="p-4 space-y-2">
-          <Link
-            href="/admin"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/admin/orders"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
-          >
-            Orders
-          </Link>
-          <Link
-            href="/admin/products"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
-          >
-            Products
-          </Link>
-          <Link
-            href="/admin/users"
-            className="flex items-center gap-3 rounded-lg bg-red/20 px-4 py-3 font-medium text-red"
-          >
-            <Users className="h-5 w-5" />
-            Users & Roles
-          </Link>
-          <Link
-            href="/admin/quotes"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
-          >
-            Quote Requests
-          </Link>
-        </nav>
-      </aside>
-
-      <main className="ml-64 p-8">
+    <>
         <nav className="mb-8 flex items-center gap-2 text-sm text-charcoal/70">
           <Link href="/" className="hover:text-red">Home</Link>
           <ChevronRight className="h-4 w-4" />
@@ -232,7 +192,6 @@ export default function AdminUsersPage() {
             </table>
           </div>
         )}
-      </main>
-    </div>
+    </>
   );
 }

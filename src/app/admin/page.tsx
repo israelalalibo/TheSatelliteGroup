@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronRight, Package, ShoppingCart, Users, BarChart3, FileText } from "lucide-react";
+import { ChevronRight, Package, ShoppingCart, Users, BarChart3 } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 
 interface DashboardStats {
@@ -22,7 +22,6 @@ interface DashboardStats {
 }
 
 export default function AdminDashboardPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -45,72 +44,7 @@ export default function AdminDashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-soft-gray">
-      <aside
-        className={`fixed left-0 top-0 z-40 h-full w-64 bg-navy text-white transition-transform ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <div className="flex h-16 items-center justify-between border-b border-white/10 px-4">
-          <span className="font-heading font-bold">Admin</span>
-          <button
-            type="button"
-            onClick={() => setSidebarOpen(false)}
-            className="p-2 hover:bg-white/10 rounded"
-          >
-            ←
-          </button>
-        </div>
-        <nav className="p-4 space-y-2">
-          <Link
-            href="/admin"
-            className="flex items-center gap-3 rounded-lg bg-red/20 px-4 py-3 font-medium text-red"
-          >
-            <BarChart3 className="h-5 w-5" />
-            Dashboard
-          </Link>
-          <Link
-            href="/admin/orders"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
-          >
-            <ShoppingCart className="h-5 w-5" />
-            Orders
-          </Link>
-          <Link
-            href="/admin/products"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
-          >
-            <Package className="h-5 w-5" />
-            Products
-          </Link>
-          <Link
-            href="/admin/users"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
-          >
-            <Users className="h-5 w-5" />
-            Users & Roles
-          </Link>
-          <Link
-            href="/admin/quotes"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-white/80 hover:bg-white/10"
-          >
-            <FileText className="h-5 w-5" />
-            Quote Requests
-          </Link>
-        </nav>
-      </aside>
-
-      {!sidebarOpen && (
-        <button
-          type="button"
-          onClick={() => setSidebarOpen(true)}
-          className="fixed left-4 top-4 z-30 rounded-lg bg-navy p-2 text-white"
-        >
-          ☰
-        </button>
-      )}
-
-      <main className={`transition-all ${sidebarOpen ? "ml-64" : "ml-0"} p-8`}>
+    <>
         <nav className="mb-8 flex items-center gap-2 text-sm text-charcoal/70">
           <Link href="/" className="hover:text-red">Home</Link>
           <ChevronRight className="h-4 w-4" />
@@ -219,7 +153,6 @@ export default function AdminDashboardPage() {
             View All Orders
           </Link>
         </div>
-      </main>
-    </div>
+    </>
   );
 }
