@@ -33,7 +33,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Satelitechuks Group | Premium Printing & Branding | Asaba, Nigeria",
+  title: "Satelite Group | Premium Printing & Branding | Asaba, Nigeria",
   description:
     "Transform your brand with premium printing, custom branding, and corporate gifting solutions. Trusted by businesses across Nigeria. Fast delivery, quality guaranteed.",
   keywords: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     "awards",
   ],
   openGraph: {
-    title: "Satelitechuks Group | Premium Printing & Branding",
+    title: "Satelite Group | Premium Printing & Branding",
     description: "Premium printing and branding solutions trusted by businesses across Nigeria",
   },
 };

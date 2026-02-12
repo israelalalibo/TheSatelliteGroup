@@ -35,14 +35,14 @@ export async function generateMetadata({ params }: PageProps) {
   const categoryName = CATEGORY_NAMES[slug];
   if (product) {
     return {
-      title: `${product.name} | Satelitechuks Group - Premium Printing Nigeria`,
+      title: `${product.name} | Satelite Group - Premium Printing Nigeria`,
       description: product.shortDescription,
     };
   }
   if (categoryName) {
     return {
-      title: `${categoryName} | Satelitechuks Group - Premium Printing Nigeria`,
-      description: `Shop ${categoryName} - premium printing at Satelitechuks Group.`,
+      title: `${categoryName} | Satelite Group - Premium Printing Nigeria`,
+      description: `Shop ${categoryName} - premium printing at Satelite Group.`,
     };
   }
   return { title: "Product Not Found" };

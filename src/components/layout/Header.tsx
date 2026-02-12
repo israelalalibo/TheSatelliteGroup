@@ -79,7 +79,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="font-heading text-xl font-bold text-navy md:text-2xl">
-              Satelitechuks<span className="text-red"> Group</span>
+              Satelite<span className="text-red"> Group</span>
             </span>
           </Link>
 

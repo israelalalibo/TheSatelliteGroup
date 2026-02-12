@@ -35,7 +35,7 @@ const SERVICES = [
 ];
 
 export const metadata = {
-  title: "Services | Satelitechuks Group - Printing & Branding Nigeria",
+  title: "Services | Satelite Group - Printing & Branding Nigeria",
   description: "Complete printing, branding, and promotional solutions: flex banners, SAV stickers, business cards, posters, flyers, apparel, awards, plaques, machines, raw materials, signage, and more.",
 };
 

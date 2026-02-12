@@ -3,8 +3,8 @@ import { ChevronRight, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 
 export const metadata = {
-  title: "Contact Us | Satelitechuks Group - Premium Printing Nigeria",
-  description: "Get in touch with Satelitechuks Group for printing and branding services. Located in Asaba, Delta State, Nigeria.",
+  title: "Contact Us | Satelite Group - Premium Printing Nigeria",
+  description: "Get in touch with Satelite Group for printing and branding services. Located in Asaba, Delta State, Nigeria.",
 };
 
 export default function ContactPage() {

@@ -44,7 +44,7 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-block">
               <span className="font-heading text-xl font-bold">
-                Satelitechuks<span className="text-red"> Group</span>
+                Satelite<span className="text-red"> Group</span>
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/80">
@@ -130,7 +130,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-custom flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
           <p className="text-sm text-white/60">
-            © {new Date().getFullYear()} Satelitechuks Group. All rights reserved.
+            © {new Date().getFullYear()} Satelite Group. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/terms" className="text-white/60 hover:text-red">

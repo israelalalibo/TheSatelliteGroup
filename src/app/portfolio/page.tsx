@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { PORTFOLIO_ITEMS } from "@/lib/data/portfolio";
 
 export const metadata = {
-  title: "Portfolio | Satelitechuks Group - Our Work",
+  title: "Portfolio | Satelite Group - Our Work",
   description: "Explore our portfolio of completed printing and branding projects.",
 };
 

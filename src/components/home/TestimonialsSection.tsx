@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const TESTIMONIALS = [
   {
     quote:
-      "Satelitechuks Group delivered exceptional business cards for our company. The quality exceeded our expectations and the turnaround time was impressive.",
+      "Satelite Group delivered exceptional business cards for our company. The quality exceeded our expectations and the turnaround time was impressive.",
     name: "Adebayo Okonkwo",
     company: "Tech Solutions Ltd",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
@@ -15,7 +15,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "We've used Satelitechuks Group for all our event materials for the past 2 years. Reliable, professional, and the best printing quality in Asaba.",
+      "We've used Satelite Group for all our event materials for the past 2 years. Reliable, professional, and the best printing quality in Asaba.",
     name: "Chioma Nwosu",
     company: "Events Pro Nigeria",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",

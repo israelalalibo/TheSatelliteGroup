@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 export const metadata = {
-  title: "Privacy Policy | Satelitechuks Group",
-  description: "Privacy policy for Satelitechuks Group.",
+  title: "Privacy Policy | Satelite Group",
+  description: "Privacy policy for Satelite Group.",
 };
 
 export default function PrivacyPage() {
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
         <div className="prose prose-navy max-w-3xl space-y-6 text-charcoal/80">
           <p className="text-sm text-charcoal/60">Last updated: February 2026</p>
           <p>
-            Satelitechuks Group respects your privacy. This policy describes how we collect, use, and
+            Satelite Group respects your privacy. This policy describes how we collect, use, and
             protect your personal information.
           </p>
           <h2 className="font-heading text-xl font-bold text-navy">Information We Collect</h2>

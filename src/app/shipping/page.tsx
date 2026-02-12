@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ChevronRight, Truck, MapPin, Clock } from "lucide-react";
 
 export const metadata = {
-  title: "Shipping & Delivery | Satelitechuks Group",
-  description: "Shipping and delivery information for Satelitechuks Group.",
+  title: "Shipping & Delivery | Satelite Group",
+  description: "Shipping and delivery information for Satelite Group.",
 };
 
 export default function ShippingPage() {

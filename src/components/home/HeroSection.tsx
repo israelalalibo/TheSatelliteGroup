@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { Search, Truck, Shield, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -27,17 +26,20 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-[90vh] overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Video with Overlay */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/products/flex-banner-warehouse.png"
-          alt="Satelitechuks Group — printing machines, raw materials, and branding"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-hero" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+          poster="/images/products/flex-banner-warehouse.png"
+        >
+          <source src="/brand-video.mp4" type="video/mp4" />
+        </video>
+        {/* Gradient overlay for text readability — lets video peek through */}
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/75 via-navy/55 to-navy/92" />
       </div>
 
       {/* Content */}
@@ -48,12 +50,12 @@ export function HeroSection() {
           transition={{ duration: 0.6 }}
           className="max-w-4xl"
         >
-          <h1 className="font-heading text-hero font-bold leading-tight text-white md:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="font-heading text-hero font-bold leading-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:text-5xl lg:text-6xl xl:text-7xl">
             Transform Your Brand.
             <br />
-            <span className="text-red">Elevate Your Business.</span>
+            <span className="text-red drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">Elevate Your Business.</span>
           </h1>
-          <p className="mt-6 text-lg text-white/90 md:text-xl">
+          <p className="mt-6 text-lg text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] md:text-xl">
             Printing machines, raw materials, and finished products—one-stop shop for
             everything printing and branding. Trusted by businesses across Nigeria.
           </p>
@@ -113,7 +115,7 @@ export function HeroSection() {
             {TRUST_BADGES.map((badge) => (
               <div
                 key={badge.text}
-                className="flex items-center gap-2 text-white/90"
+                className="flex items-center gap-2 text-white/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
               >
                 <badge.icon className="h-5 w-5 text-red" />
                 <span className="font-medium">✓ {badge.text}</span>

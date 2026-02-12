@@ -21,7 +21,7 @@ const CATEGORIES = [
 ];
 
 export const metadata = {
-  title: "Products | Satelitechuks Group - Premium Printing Nigeria",
+  title: "Products | Satelite Group - Premium Printing Nigeria",
   description: "Browse our range of premium printing products: business cards, flyers, banners, corporate gifts, awards, and more.",
 };
 
