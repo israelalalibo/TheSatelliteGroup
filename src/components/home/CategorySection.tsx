@@ -6,14 +6,14 @@ import { motion } from "framer-motion";
 import { formatPrice } from "@/lib/utils";
 
 const CATEGORIES = [
-  { name: "Printing Machines", slug: "printing-machines", image: "/images/products/xp600-large-format.png", startingPrice: 45000 },
+  { name: "Printing Machines", slug: "printing-machines", image: "/images/products/xp600-large-format.png", startingPrice: 80000 },
   { name: "Flex Banner Material", slug: "raw-materials", image: "/images/products/flex-banner-rolls.png", startingPrice: 18000 },
   { name: "Vinyl & Stickers", slug: "stickers", image: "/images/products/vinyl-sticker-rolls.png", startingPrice: 2000 },
   { name: "Banner Printing", slug: "banners", image: "/images/products/flex-banner-warehouse.png", startingPrice: 1500 },
-  { name: "Heat Press Machines", slug: "printing-machines", image: "/images/products/heat-press-machine.png", startingPrice: 45000 },
-  { name: "Corporate Gifts", slug: "corporate-gifts", image: "/images/products/mug-cup-heat-press.png", startingPrice: 2500 },
+  { name: "Heat Press Machines", slug: "printing-machines", image: "/images/products/heat-press-machine.png", startingPrice: 200000 },
+  { name: "Corporate Gifts", slug: "corporate-gifts", image: "/images/products/mug-cup-heat-press.png", startingPrice: 400 },
   { name: "Business Cards", slug: "business-cards", image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80", startingPrice: 8500 },
-  { name: "Awards & Plaques", slug: "awards", image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&q=80", startingPrice: 8500 },
+  { name: "Awards & Plaques", slug: "awards", image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&q=80", startingPrice: 100 },
   { name: "Posters & Flyers", slug: "posters-flyers", image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80", startingPrice: 150 },
 ];
 
