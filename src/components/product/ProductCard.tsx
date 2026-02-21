@@ -26,7 +26,9 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="p-4">
         <h2 className="font-semibold text-navy group-hover:text-red">{product.name}</h2>
         <p className="mt-1 line-clamp-2 text-sm text-charcoal/70">{product.shortDescription}</p>
-        <p className="mt-2 font-bold text-navy">From {formatPrice(product.basePrice)}</p>
+        <p className="mt-2 font-bold text-navy">
+          {product.basePrice > 0 ? `From ${formatPrice(product.basePrice)}` : "Contact for price"}
+        </p>
       </div>
     </Link>
   );

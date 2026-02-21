@@ -101,17 +101,25 @@ export function ProductConfig({ product }: ProductConfigProps) {
     toggleWishlist(product.id);
   };
 
-  const whatsappMessage = `Hi! I'd like to order: ${product.name}, Quantity: ${quantity}, Price: ${formatPrice(unitPrice)}`;
+  const whatsappMessage = product.basePrice > 0
+    ? `Hi! I'd like to order: ${product.name}, Quantity: ${quantity}, Price: ${formatPrice(unitPrice)}`
+    : `Hi! I'm interested in: ${product.name}. Please send me a quote.`;
 
   return (
     <div className="mt-8 space-y-6">
       {/* Price */}
       <div className="rounded-xl bg-soft-gray p-6">
-        <p className="text-sm text-charcoal/70">Starting from</p>
-        <p className="text-2xl font-bold text-navy">{formatPrice(unitPrice)}</p>
-        <p className="mt-1 text-sm text-charcoal/60">
-          {formatPrice(unitPrice / quantity)} per unit
-        </p>
+        {product.basePrice > 0 ? (
+          <>
+            <p className="text-sm text-charcoal/70">Starting from</p>
+            <p className="text-2xl font-bold text-navy">{formatPrice(unitPrice)}</p>
+            <p className="mt-1 text-sm text-charcoal/60">
+              {formatPrice(unitPrice / quantity)} per unit
+            </p>
+          </>
+        ) : (
+          <p className="text-xl font-bold text-navy">Contact for price</p>
+        )}
       </div>
 
       {/* Quantity */}
@@ -174,14 +182,16 @@ export function ProductConfig({ product }: ProductConfigProps) {
 
       {/* Actions */}
       <div className="flex flex-col gap-3 sm:flex-row">
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          className="btn-primary flex flex-1 items-center justify-center gap-2"
-        >
-          <ShoppingCart className="h-5 w-5" />
-          {added ? "Added to Cart!" : "Add to Cart"}
-        </button>
+        {product.basePrice > 0 && (
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className="btn-primary flex flex-1 items-center justify-center gap-2"
+          >
+            <ShoppingCart className="h-5 w-5" />
+            {added ? "Added to Cart!" : "Add to Cart"}
+          </button>
+        )}
         <a
           href={`https://wa.me/2348102652650?text=${encodeURIComponent(whatsappMessage)}`}
           target="_blank"
