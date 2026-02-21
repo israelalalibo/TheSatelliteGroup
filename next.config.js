@@ -12,11 +12,6 @@ const nextConfig = {
         hostname: 'images.pexels.com',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'satelitegroup.com.ng',
-        pathname: '/wp-content/uploads/**',
-      },
     ],
   },
 }

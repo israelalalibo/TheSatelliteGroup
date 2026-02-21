@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
+const PLACEHOLDER_IMAGE = "/images/products/flex-banner-warehouse.png";
+
 interface ProductCardImageProps {
   name: string;
   images: string[];
@@ -19,12 +21,20 @@ export function ProductCardImage({
 }: ProductCardImageProps) {
   const [index, setIndex] = useState(0);
   const [hovered, setHovered] = useState(false);
-  const list = images.length > 0 ? images : [""];
+  const [failedSrcs, setFailedSrcs] = useState<Set<string>>(new Set());
+  const list = images.length > 0 ? images : [PLACEHOLDER_IMAGE];
 
   const goTo = useCallback(
     (i: number) => setIndex((i + list.length) % list.length),
     [list.length]
   );
+
+  const handleError = useCallback((src: string) => {
+    setFailedSrcs((prev) => new Set(prev).add(src));
+  }, []);
+
+  const effectiveSrc = (src: string) =>
+    !src || failedSrcs.has(src) ? PLACEHOLDER_IMAGE : src;
 
   useEffect(() => {
     if (list.length <= 1 || hovered) return;
@@ -47,11 +57,12 @@ export function ProductCardImage({
             }`}
           >
             <Image
-              src={src}
+              src={effectiveSrc(src)}
               alt={i === 0 ? name : `${name} view ${i + 1}`}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes={sizes}
+              onError={() => handleError(src)}
             />
           </div>
         ))}

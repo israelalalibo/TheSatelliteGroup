@@ -50,16 +50,19 @@ async function tryDownload(imageFile) {
   const ext = path.extname(imageFile).toLowerCase();
   const base = path.basename(imageFile, ext);
   const wpName = csvToWordPressFilename(base) + ext;
+  const altNames = [wpName, base + ext, base.replace(/-/g, "_") + ext];
 
   for (const uploadPath of UPLOAD_PATHS) {
-    const url = `${BASE_URL}/${uploadPath}/${wpName}`;
-    try {
-      const data = await download(url);
-      const outPath = path.join(OUTPUT_DIR, wpName);
-      fs.writeFileSync(outPath, data);
-      return wpName;
-    } catch {
-      continue;
+    for (const name of altNames) {
+      const url = `${BASE_URL}/${uploadPath}/${name}`;
+      try {
+        const data = await download(url);
+        const outPath = path.join(OUTPUT_DIR, wpName);
+        fs.writeFileSync(outPath, data);
+        return wpName;
+      } catch {
+        continue;
+      }
     }
   }
   return null;

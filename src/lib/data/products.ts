@@ -1,5 +1,4 @@
-import { CSV_ROWS } from "./csv-products-data";
-import { csvProductToProduct } from "./csv-products";
+import { CSV_PRODUCTS_CONSOLIDATED } from "./csv-products-consolidated";
 
 export interface ProductVariant {
   id: string;
@@ -1759,20 +1758,8 @@ export const PRODUCTS: Product[] = [
     ],
   },
 
-  // ── CSV Products (from COMPLETE_PRODUCT_IMAGE_MAPPING) ─────────────────────────────────
-  ...CSV_ROWS.map((row, i) => {
-    const [group, name, price, imageFile, altImage] = row;
-    return csvProductToProduct(
-      {
-        productGroup: group,
-        productName: name,
-        price,
-        imageFile,
-        altImage: altImage || undefined,
-      },
-      String(i + 1)
-    );
-  }),
+  // ── CSV Products (consolidated with size/type options) ───────────────────────────────────
+  ...CSV_PRODUCTS_CONSOLIDATED,
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {

@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Image from "next/image";
+
+const PLACEHOLDER_IMAGE = "/images/products/flex-banner-warehouse.png";
 
 interface ProductGalleryProps {
   name: string;
@@ -10,7 +12,15 @@ interface ProductGalleryProps {
 
 export function ProductGallery({ name, images }: ProductGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const list = images.length > 0 ? images : [""];
+  const [failedSrcs, setFailedSrcs] = useState<Set<string>>(new Set());
+  const list = images.length > 0 ? images : [PLACEHOLDER_IMAGE];
+
+  const effectiveSrc = (src: string) =>
+    !src || failedSrcs.has(src) ? PLACEHOLDER_IMAGE : src;
+
+  const handleError = useCallback((src: string) => {
+    setFailedSrcs((prev) => new Set(prev).add(src));
+  }, []);
 
   return (
     <div className="space-y-4">
@@ -23,12 +33,13 @@ export function ProductGallery({ name, images }: ProductGalleryProps) {
             }`}
           >
             <Image
-              src={src}
+              src={effectiveSrc(src)}
               alt={i === 0 ? name : `${name} view ${i + 1}`}
               fill
               className="object-cover"
               priority={i === 0}
               sizes="(max-width: 1024px) 100vw, 50vw"
+              onError={() => handleError(src)}
             />
           </div>
         ))}
@@ -47,11 +58,12 @@ export function ProductGallery({ name, images }: ProductGalleryProps) {
               }`}
             >
               <Image
-                src={img}
+                src={effectiveSrc(img)}
                 alt=""
                 fill
                 className="object-cover"
                 sizes="80px"
+                onError={() => handleError(img)}
               />
             </button>
           ))}
